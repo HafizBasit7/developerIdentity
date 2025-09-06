@@ -24,7 +24,7 @@ import { styled } from '@mui/material/styles';
 const StyledAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'scrolled',
 })(({ theme, scrolled }) => ({
-  boxShadow: scrolled ? `0 5px 20px ${alpha(theme.palette.common.black, 0.1)}` : 'none',
+  boxShadow: scrolled ? `0 5px 20px ${alpha(theme.palette.secondary.main, 0.1)}` : 'none',
   backgroundColor: scrolled ? alpha(theme.palette.background.paper, 0.95) : 'transparent',
   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
   color: theme.palette.text.primary,
@@ -56,6 +56,10 @@ const NavItem = styled('a')(({ theme }) => ({
   textDecoration: 'none',
   color: 'inherit',
   display: 'block',
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  backgroundClip: 'text',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -64,6 +68,7 @@ const NavItem = styled('a')(({ theme }) => ({
     width: '0%',
     height: '2px',
     background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+   
     transition: 'width 0.3s ease',
   },
   '&:hover::after': {
@@ -177,10 +182,10 @@ const Header = () => {
         backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97))',
       }}
     >
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         p: 2,
         borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`
       }}>
@@ -231,10 +236,10 @@ const Header = () => {
       {/* AppBar with scroll effect */}
       <ElevationScroll>
         <StyledAppBar position="fixed">
-          <Toolbar sx={{ 
-            justifyContent: 'space-between', 
+          <Toolbar sx={{
+            justifyContent: 'space-between',
             py: 1,
-            px: { xs: 2, md: 4 } 
+            px: { xs: 2, md: 4 }
           }}>
             {/* Logo / Name */}
             <Logo
@@ -247,9 +252,9 @@ const Header = () => {
             </Logo>
 
             {/* Desktop Navigation */}
-            <Box sx={{ 
-              display: { xs: 'none', md: 'flex' }, 
-              alignItems: 'center' 
+            <Box sx={{
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center'
             }}>
               {menuItems.map((item, i) => (
                 <motion.div
@@ -313,8 +318,8 @@ const Header = () => {
               ModalProps={{ keepMounted: true }}
               sx={{
                 display: { xs: 'block', md: 'none' },
-                '& .MuiDrawer-paper': { 
-                  boxSizing: 'border-box', 
+                '& .MuiDrawer-paper': {
+                  boxSizing: 'border-box',
                   width: 280,
                   border: 'none',
                   boxShadow: '0 0 40px rgba(0,0,0,0.1)',

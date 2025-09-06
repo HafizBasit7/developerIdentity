@@ -17,7 +17,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import profile from '../assets/image/profile.jpg';
-import { HashLink as Link } from 'react-router-hash-link';
 import { scrollToSection } from '../utils/scrollUtils';
 import Tilt from 'react-parallax-tilt';
 import { motion, useAnimation } from 'framer-motion';
@@ -144,38 +143,56 @@ const imageVariants = {
   }
 };
 
-// ---------- Typewriter hook ----------
-const useTypewriter = (words = [], typingSpeed = 80, pause = 1400) => {
+// ---------- Fixed Typewriter hook ----------
+const useTypewriter = (words = [], typingSpeed = 80, pause = 2000) => {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    if (!words.length) return;
-    const current = words[wordIndex];
+    if (words.length === 0) return;
 
-    if (!deleting && subIndex <= current.length) {
-      const timeout = setTimeout(() => setSubIndex((s) => s + 1), typingSpeed);
-      return () => clearTimeout(timeout);
-    }
+    const currentWord = words[wordIndex];
+    
+    const handleTyping = () => {
+      if (!isDeleting) {
+        // Typing phase
+        if (currentIndex < currentWord.length) {
+          const timeout = setTimeout(() => {
+            setCurrentText(prev => prev + currentWord[currentIndex]);
+            setCurrentIndex(prev => prev + 1);
+          }, typingSpeed);
+          return () => clearTimeout(timeout);
+        } else {
+          // Finished typing, pause before deleting
+          const timeout = setTimeout(() => {
+            setIsDeleting(true);
+          }, pause);
+          return () => clearTimeout(timeout);
+        }
+      } else {
+        // Deleting phase
+        if (currentIndex > 0) {
+          const timeout = setTimeout(() => {
+            setCurrentText(prev => prev.slice(0, -1));
+            setCurrentIndex(prev => prev - 1);
+          }, typingSpeed / 2);
+          return () => clearTimeout(timeout);
+        } else {
+          // Finished deleting, move to next word
+          setIsDeleting(false);
+          setWordIndex(prev => (prev + 1) % words.length);
+        }
+      }
+    };
 
-    if (deleting && subIndex > 0) {
-      const timeout = setTimeout(() => setSubIndex((s) => s - 1), typingSpeed / 2);
-      return () => clearTimeout(timeout);
-    }
+    const timer = setTimeout(handleTyping, isDeleting ? typingSpeed / 2 : typingSpeed);
+    
+    return () => clearTimeout(timer);
+  }, [currentIndex, isDeleting, wordIndex, words, typingSpeed, pause]);
 
-    if (subIndex === current.length) {
-      const timeout = setTimeout(() => setDeleting(true), pause);
-      return () => clearTimeout(timeout);
-    }
-
-    if (deleting && subIndex === 0) {
-      setDeleting(false);
-      setWordIndex((i) => (i + 1) % words.length);
-    }
-  }, [subIndex, deleting, wordIndex, words, typingSpeed, pause]);
-
-  return words.length ? words[wordIndex].slice(0, subIndex) : '';
+  return currentText;
 };
 
 const Hero = () => {
@@ -194,13 +211,13 @@ const Hero = () => {
     window.location.href = `mailto:${socialLinks.email}`;
   };
 
-  // Typewriter words
+  // Typewriter words with 2-second pause
   const typed = useTypewriter([
     'Full Stack Developer',
     'React & React Native Expert',
     'MERN Stack Engineer',
     'Problem Solver',
-  ]);
+  ], 80, 2000);
 
   // Floating animation for image
   useEffect(() => {
@@ -236,24 +253,7 @@ const Hero = () => {
               viewport={{ once: true, amount: 0.2 }}
             >
               <motion.div variants={itemVariants}>
-                {/* <Typography
-                  variant="h3"
-                  component="h1"
-                  gutterBottom
-                  sx={{
-                    fontWeight: 900,
-                    fontSize: { xs: '2.2rem', sm: '2.8rem', md: '3.5rem' },
-                    lineHeight: 1.1,
-                    background: `linear-gradient(135deg, ${theme.palette.text.primary} 0%, ${alpha(theme.palette.text.primary, 0.8)} 100%)`,
-                    backgroundClip: 'text',
-                    textFillColor: 'transparent',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                  }}
-                >
-                  Hi, I'm <span style={{ color: theme.palette.secondary.main }}>Hafiz Basit</span>
-                </Typography> */}
-                    <Typography
+                <Typography
                   variant="h3"
                   component="h1"
                   gutterBottom
@@ -354,7 +354,7 @@ const Hero = () => {
                       variant="outlined"
                       size="large"
                       component="a"
-                      href="/Hafiz_Basit_Resume.pdf"
+                      href="/Basit's_Resume_.pdf"
                       download="Hafiz_Basit_Resume.pdf"
                       endIcon={<DownloadIcon />}
                       sx={{
