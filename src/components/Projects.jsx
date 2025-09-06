@@ -33,7 +33,11 @@ import D3 from '../assets/image/D3.jpg';
 import D4 from '../assets/image/D4.jpg';
 import D5 from '../assets/image/D5.jpg';
 import D6 from '../assets/image/D6.jpg';
-
+import Cosmetic_Admin from '../assets/image/Cosmetic_Admin.png';
+import Products from '../assets/image/Products.png';
+import camper1 from '../assets/image/camper1.png';
+import camper2 from '../assets/image/camper2.png';
+import camper3 from '../assets/image/camper3.png';
 
 
 
@@ -153,89 +157,103 @@ const Projects = () => {
   };
 
   const projects = [
+   
     {
-      title: 'Qafzh Solar',
-      description: 'Smart solar marketplace connecting buyers, engineers, and shops with dynamic filtering.',
-      technologies: ['React Native', 'React', 'Node.js', 'MongoDB'],
-      githubUrl: '#',
-      liveUrl: '#',
-      images: [Solar1, Solar2, Solar3],
-      role: 'Full-Stack Developer',
-      period: 'Jul 2025 – Ongoing'
-    },
-    {
-      title: 'Face Recognition System',
-      description: 'Real-time attendance system using face-api.js with webcam support.',
-      technologies: ['React', 'Material UI', 'face-api.js'],
-      githubUrl: '#',
-      liveUrl: '#',
-      images: [
-        'https://via.placeholder.com/400x300/147efb/ffffff?text=Face+Recognition',
-        'https://via.placeholder.com/400x300/2d2e32/ffffff?text=Face+UI'
-      ],
-      role: 'Lead Frontend',
-      period: 'Jun 2025'
-    },
-    {
-      title: 'Employee Attendence System',
-      description: 'Employee Management System with features like attendance, assignments, and employee profile.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'JWT'],
-      githubUrl: 'https://github.com/HafizBasit7/Employee_Attendence_App',
-      liveUrl: '#',
-      images: [
-        CheckIn,
-        History,
-        Assignments,
-        Ass_Details,
-        EmpProfile,
-      ],
-      role: 'Full-Stack',
-      period: 'Jun 2025'
-    },
-    {
-      title: 'DriveBids',
-      description: 'Vehicle auction platform with real-time bidding and tracking.',
-      technologies: ['React Native', 'React', 'Node.js', 'MongoDB'],
-      githubUrl: 'https://github.com/HafizBasit7/DriveBids_Mobile',
-    //   liveUrl: 'https://drive-bids.netlify.app/',
-      images: [
-        D1,
-        D2,
-        D3,
-        D5,
-        D4,
-        D6
-
-      ],
-      role: 'Frontend Dev',
-      period: 'May 2025'
-    },
-    {
-      title: 'Bike Hub',
-      description: 'Vehicle marketplace with AI image enhancement and messaging.',
-      technologies: ['React Native', 'Firebase', 'Stripe', 'PyTorch'],
-      githubUrl: '#',
-      liveUrl: '#',
-      images: [
-        'https://via.placeholder.com/400x300/147efb/ffffff?text=Bike+Hub',
-        'https://via.placeholder.com/400x300/2d2e32/ffffff?text=AI+Enhancer'
-      ],
-      role: 'Team Lead',
-      period: 'Apr 2024 – Jan 2025'
-    },
-    {
-      title: 'Task Manager',
-      description: 'Productivity app with drag-drop tasks and collaborative features.',
+      title: 'Cosmetic Store',
+      description: 'Productive e-commerce store with order placement and collaborative features.',
       technologies: ['React', 'Redux', 'Firebase'],
       githubUrl: '#',
       liveUrl: '#',
       images: [
-        'https://via.placeholder.com/400x300/147efb/ffffff?text=Task+Manager',
-        'https://via.placeholder.com/400x300/2d2e32/ffffff?text=Dashboard'
+        Cosmetic_Admin,
+        Products
       ],
       role: 'Full-Stack',
       period: 'Mar 2025'
-    }
+    },
+    {
+        title: 'Camper Admin',
+        description: 'Camper Dooly, a camper buying/selling and booking platform.',
+        technologies: ['React', 'Redux', 'Firebase'],
+        githubUrl: '#',
+        liveUrl: '#',
+        images: [
+          camper1,
+          camper2,
+          camper3
+        ],
+        role: 'Full-Stack',
+        period: 'Mar 2025'
+      },
+      {
+        title: 'Qafzh Solar',
+        description: 'Smart solar marketplace connecting buyers, engineers, and shops with dynamic filtering.',
+        technologies: ['React Native', 'React', 'Node.js', 'MongoDB'],
+        githubUrl: '#',
+        liveUrl: '#',
+        images: [Solar1, Solar2, Solar3],
+        role: 'Full-Stack Developer',
+        period: 'Jul 2025 – Ongoing'
+      },
+      // {
+      //   title: 'Face Recognition System',
+      //   description: 'Real-time attendance system using face-api.js with webcam support.',
+      //   technologies: ['React', 'Material UI', 'face-api.js'],
+      //   githubUrl: '#',
+      //   liveUrl: '#',
+      //   images: [
+      //     'https://via.placeholder.com/400x300/147efb/ffffff?text=Face+Recognition',
+      //     'https://via.placeholder.com/400x300/2d2e32/ffffff?text=Face+UI'
+      //   ],
+      //   role: 'Lead Frontend',
+      //   period: 'Jun 2025'
+      // },
+      {
+        title: 'Employee Attendence System',
+        description: 'Employee Management System with features like attendance, assignments, and employee profile.',
+        technologies: ['React', 'Node.js', 'MongoDB', 'JWT'],
+        githubUrl: 'https://github.com/HafizBasit7/Employee_Attendence_App',
+        liveUrl: '#',
+        images: [
+          CheckIn,
+          History,
+          Assignments,
+          Ass_Details,
+          EmpProfile,
+        ],
+        role: 'Full-Stack',
+        period: 'Jun 2025'
+      },
+      {
+        title: 'DriveBids',
+        description: 'Vehicle auction platform with real-time bidding and tracking.',
+        technologies: ['React Native', 'React', 'Node.js', 'MongoDB'],
+        githubUrl: 'https://github.com/HafizBasit7/DriveBids_Mobile',
+      //   liveUrl: 'https://drive-bids.netlify.app/',
+        images: [
+          D1,
+          D2,
+          D3,
+          D5,
+          D4,
+          D6
+        ],
+        role: 'Frontend Dev',
+        period: 'May 2025'
+      },
+      // {
+      //   title: 'Bike Hub',
+      //   description: 'Vehicle marketplace with AI image enhancement and messaging.',
+      //   technologies: ['React Native', 'Firebase', 'Stripe', 'PyTorch'],
+      //   githubUrl: '#',
+      //   liveUrl: '#',
+      //   images: [
+      //     'https://via.placeholder.com/400x300/147efb/ffffff?text=Bike+Hub',
+      //     'https://via.placeholder.com/400x300/2d2e32/ffffff?text=AI+Enhancer'
+      //   ],
+      //   role: 'Team Lead',
+      //   period: 'Apr 2024 – Jan 2025'
+      // },
   ];
 
   return (

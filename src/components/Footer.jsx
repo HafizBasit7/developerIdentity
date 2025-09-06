@@ -17,7 +17,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 600 }}>
-            Your Name
+            Hafiz Basit
           </Typography>
           <Typography variant="body2" align="center" sx={{ maxWidth: '500px', mb: 3 }}>
             A passionate developer dedicated to creating innovative solutions and beautiful user experiences.
@@ -34,7 +34,7 @@ const Footer = () => {
             </IconButton>
           </Box>
           <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-            © {new Date().getFullYear()} Made with ❤️ by Your Name
+            © {new Date().getFullYear()} Made with ❤️ by Hafiz Basit
           </Typography>
         </Box>
       </Container>
