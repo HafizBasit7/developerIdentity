@@ -8,6 +8,7 @@ import {
   Grid,
   Alert,
   Snackbar,
+  useTheme,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
@@ -16,16 +17,17 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const ContactSection = styled(Box)(({ theme }) => ({
   padding: '100px 0',
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.mode === 'light' ? '#f9fafc' : theme.palette.background.default,
 }));
 
-const ContactInfo = styled(Box)(({ theme }) => ({
+const ContactInfo = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   marginBottom: '25px',
 }));
 
 const Contact = () => {
+  const theme = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,8 +44,13 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
+
+    // Simple validation
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    // Here you would typically send the form data to a backend (API call)
     console.log('Form submitted:', formData);
+
     setOpenSnackbar(true);
     setFormData({ name: '', email: '', message: '' });
   };
@@ -55,6 +62,7 @@ const Contact = () => {
   return (
     <ContactSection id="contact">
       <Container maxWidth="lg">
+        {/* Heading */}
         <Typography
           variant="h3"
           component="h2"
@@ -62,7 +70,7 @@ const Contact = () => {
           gutterBottom
           sx={{ fontWeight: 700 }}
         >
-          Contact
+          Contact Me
         </Typography>
         <Typography
           variant="h6"
@@ -71,18 +79,21 @@ const Contact = () => {
           color="textSecondary"
           sx={{ mb: 8, maxWidth: '700px', margin: '0 auto' }}
         >
-          Feel free to reach out if you're looking for a developer, have a question, or just want to connect
+          Have a project in mind or just want to connect? Drop me a message, and I’ll get back to you as soon as possible.
         </Typography>
+
         <Grid container spacing={8}>
+          {/* Left Side - Contact Info */}
           <Grid item xs={12} md={6}>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, mb: 4 }}>
-              Let's talk about everything!
+              Let’s Talk!
             </Typography>
-            <Typography variant="body1" paragraph>
-              If you have any questions or would like to discuss a project, feel free to reach out. I'm always open to new opportunities and interesting conversations.
+            <Typography variant="body1" paragraph sx={{ mb: 4 }}>
+              I’m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </Typography>
+
             <ContactInfo>
-              <EmailIcon sx={{ color: 'secondary.main', fontSize: '30px', mr: 2 }} />
+              <EmailIcon sx={{ color: theme.palette.secondary.main, fontSize: '30px', mr: 2 }} />
               <Box>
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Email
@@ -90,8 +101,9 @@ const Contact = () => {
                 <Typography variant="body1">hafiz.zes7@gmail.com</Typography>
               </Box>
             </ContactInfo>
+
             <ContactInfo>
-              <PhoneIcon sx={{ color: 'secondary.main', fontSize: '30px', mr: 2 }} />
+              <PhoneIcon sx={{ color: theme.palette.secondary.main, fontSize: '30px', mr: 2 }} />
               <Box>
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Phone
@@ -99,8 +111,9 @@ const Contact = () => {
                 <Typography variant="body1">+92 318 5343522</Typography>
               </Box>
             </ContactInfo>
+
             <ContactInfo>
-              <LocationOnIcon sx={{ color: 'secondary.main', fontSize: '30px', mr: 2 }} />
+              <LocationOnIcon sx={{ color: theme.palette.secondary.main, fontSize: '30px', mr: 2 }} />
               <Box>
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Location
@@ -109,11 +122,13 @@ const Contact = () => {
               </Box>
             </ContactInfo>
           </Grid>
+
+          {/* Right Side - Contact Form */}
           <Grid item xs={12} md={6}>
             <form onSubmit={handleSubmit}>
               <TextField
                 fullWidth
-                label="Name"
+                label="Full Name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -123,7 +138,7 @@ const Contact = () => {
               />
               <TextField
                 fullWidth
-                label="Email"
+                label="Email Address"
                 name="email"
                 type="email"
                 value={formData.email}
@@ -134,27 +149,30 @@ const Contact = () => {
               />
               <TextField
                 fullWidth
-                label="Message"
+                label="Your Message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 margin="normal"
                 required
                 multiline
-                rows={4}
+                rows={5}
                 variant="outlined"
               />
               <Button
                 type="submit"
                 variant="contained"
                 size="large"
+                fullWidth
                 sx={{
                   mt: 3,
-                  backgroundColor: 'secondary.main',
+                  backgroundColor: theme.palette.secondary.main,
                   color: 'white',
                   fontWeight: 600,
-                  padding: '12px 40px',
+                  padding: '14px 0',
                   borderRadius: '10px',
+                  textTransform: 'none',
+                  fontSize: '16px',
                   '&:hover': {
                     backgroundColor: '#0e6ad1',
                   },
@@ -166,14 +184,20 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Container>
+
+      {/* Success Snackbar */}
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-          Your message has been sent successfully!
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          ✅ Your message has been sent successfully!
         </Alert>
       </Snackbar>
     </ContactSection>

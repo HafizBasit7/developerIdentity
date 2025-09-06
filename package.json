@@ -15,8 +15,11 @@
     "@fontsource/roboto": "^5.2.6",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
+    "framer-motion": "^12.23.12",
+    "lottie-react": "^2.4.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-parallax-tilt": "^1.7.307",
     "react-router-hash-link": "^2.4.3"
   },
   "devDependencies": {
