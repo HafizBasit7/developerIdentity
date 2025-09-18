@@ -102,6 +102,11 @@ import ImgG3 from '../assets/image/ImgG3.jpg';
 import ImgS1 from '../assets/image/ImgS1.jpg';
 import ImgS2 from '../assets/image/ImgS2.jpg';
 import ImgS3 from '../assets/image/ImgS3.jpg';
+
+import Wet1 from '../assets/image/Wet1.jpg';
+import Wet2 from '../assets/image/Wet2.jpg';
+import Wet3 from '../assets/image/Wet3.jpg';
+import Wet4 from '../assets/image/Wet4.jpg';
 // Animation keyframes
 const floatAnimation = keyframes`
   0% { transform: translateY(0px); }
@@ -515,6 +520,17 @@ const Projects = () => {
       images: [MedHome, Med1, Med2, Med3,  Med4, Med5, Med6, Med7, Med8, MedProf],
       role: 'Frontend Developer',
       period: 'Mar 2025',
+      category: 'Mobile' // Added category
+    },
+
+    {
+      title: 'Weather App',
+      description: 'Weather App – Real-time Forecasting Application',
+      technologies: ['React Native','OpenWeather API',],
+      // githubUrl: 'https://github.com/HafizBasit7/Medvoxfrontend',
+      images: [Wet1, Wet2, Wet3, Wet4 ],
+      role: 'Full Stack Developer',
+      period: 'Jul 2025',
       category: 'Mobile' // Added category
     },
 
