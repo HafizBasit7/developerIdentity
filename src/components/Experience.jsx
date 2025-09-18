@@ -113,21 +113,21 @@ const Experience = () => {
         'Introduced code review process improving code quality'
       ]
     },
-    {
-      title: 'Frontend Developer',
-      company: 'Web Solutions LLC',
-      period: '2024 - 2025',
-      description:
-        'Developed responsive web applications using React and modern JavaScript. Collaborated with UX designers to create intuitive user interfaces.',
-      // icon: <WorkIcon fontSize="medium" />,
-       icon: <SchoolIcon fontSize="medium" />,
-      type: 'work',
-      highlights: [
-        'Built 10+ responsive web applications',
-        'Improved page load speed by 60%',
-        'Collaborated with cross-functional teams'
-      ]
-    },
+    // {
+    //   title: 'Frontend Developer',
+    //   company: 'Web Solutions LLC',
+    //   period: '2024 - 2025',
+    //   description:
+    //     'Developed responsive web applications using React and modern JavaScript. Collaborated with UX designers to create intuitive user interfaces.',
+    //   // icon: <WorkIcon fontSize="medium" />,
+    //    icon: <SchoolIcon fontSize="medium" />,
+    //   type: 'work',
+    //   highlights: [
+    //     'Built 10+ responsive web applications',
+    //     'Improved page load speed by 60%',
+    //     'Collaborated with cross-functional teams'
+    //   ]
+    // },
     
     {
       title: 'Bachelor of Computer Science',
