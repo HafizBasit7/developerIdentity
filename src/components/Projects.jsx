@@ -107,6 +107,34 @@ import Wet1 from '../assets/image/Wet1.jpg';
 import Wet2 from '../assets/image/Wet2.jpg';
 import Wet3 from '../assets/image/Wet3.jpg';
 import Wet4 from '../assets/image/Wet4.jpg';
+
+import List from '../assets/image/screenshots/List.jpg';
+import Detail from '../assets/image/screenshots/Detail.jpg';
+import ListDet from '../assets/image/screenshots/ListDet.jpg';
+import Followers from '../assets/image/screenshots/Followers.jpg';
+import Chat from '../assets/image/screenshots/Chat.jpg';
+import convers from '../assets/image/screenshots/convers.jpg';
+import PropChat from '../assets/image/screenshots/PropChat.jpg';
+import Task from '../assets/image/screenshots/Task.jpg';
+import Profile from '../assets/image/screenshots/Profile.jpg';
+import Prof from '../assets/image/screenshots/Prof.jpg';
+import SideBar from '../assets/image/screenshots/SideBar.jpg';
+import CreateList from '../assets/image/screenshots/CreateList.jpg';
+
+
+import Qur1 from '../assets/image/Quran/Qur1.jpg';
+import Qur2 from '../assets/image/Quran/Qur2.jpg';
+import Qur3 from '../assets/image/Quran/Qur3.jpg';
+import Qur4 from '../assets/image/Quran/Qur4.jpg';
+import Qur5 from '../assets/image/Quran/Qur5.jpg';
+import Qur6 from '../assets/image/Quran/Qur6.jpg';
+import Qur7 from '../assets/image/Quran/Qur7.jpg';
+import Qur8 from '../assets/image/Quran/Qur8.jpg';
+import Qur9 from '../assets/image/Quran/Qur9.jpg';
+import Qur10 from '../assets/image/Quran/Qur10.jpg';
+import Qur11 from '../assets/image/Quran/Qur11.jpg';
+import Qur12 from '../assets/image/Quran/Qur12.jpg';
+
 // Animation keyframes
 const floatAnimation = keyframes`
   0% { transform: translateY(0px); }
@@ -456,6 +484,33 @@ const Projects = () => {
       period: 'Mar 2025',
       category: 'Web' // Added category
     },
+
+
+    //////////////////////////// MOBILE APP ////////////////////////////
+
+     {
+      title: 'TrySwitch',
+      description: 'A seller marketplace app where sellers can manage product listings, buyers can chat with sellers, and users can follow stores.',
+      technologies: ['React Native CLI', 'AWS', '.NET', 'Redux Toolkit'],
+      githubUrl: 'https://github.com/HafizBasit7/TrySwitch_SellerApp',
+      images: [List, ListDet, Detail, Followers, Chat, convers, Task, PropChat, Profile, Prof, SideBar, CreateList],
+      role: 'Lead: Full Stack Developer',
+      period: 'Oct-Nov 2025',
+      category: 'Mobile' // Added category
+    },
+
+    {
+  title: 'Easy Quran',
+  description:
+    'A comprehensive Islamic mobile application offering Quran reading with translations, Qibla direction, tasbih counter, nearby mosque locator, prayer timings, multiple reciters, and a complete Hajj/Umrah guide. Designed to provide a seamless spiritual experience for users worldwide.',
+  technologies: ['React Native', 'Expo', 'Firebase', 'Google Maps API', 'Cloudinary'],
+  githubUrl: 'https://github.com/HafizBasit7/Al-Quran',
+  images: [Qur1, Qur2, Qur3, Qur4, Qur5, Qur6, Qur7, Qur8, Qur9, Qur10, Qur11, Qur12],
+  role: 'Lead Full Stack Developer',
+  period: 'September 2025',
+  category: 'Mobile'
+},
+
 
     {
       title: 'Expense Tracker',
