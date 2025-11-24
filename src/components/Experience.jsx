@@ -65,7 +65,7 @@ const ExperienceItem = styled(motion(Paper))(({ theme }) => ({
   },
 }));
 
-const IconWrapper = styled(Box)(({ theme, type }) => ({
+const IconWrapper = styled(Box)(({ theme, $type }) => ({
   width: 60,
   height: 60,
   borderRadius: '16px',
@@ -73,7 +73,7 @@ const IconWrapper = styled(Box)(({ theme, type }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   marginRight: theme.spacing(3),
-  background: type === 'work' 
+  background: $type === 'work' 
     ? `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`
     : `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
   color: '#fff',
@@ -94,53 +94,71 @@ const TimelineDot = styled(Box)(({ theme }) => ({
   zIndex: 2,
 }));
 
+const TechChip = styled(Box)(({ theme }) => ({
+  display: 'inline-block',
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  color: theme.palette.primary.main,
+  padding: '4px 12px',
+  borderRadius: '16px',
+  fontSize: '0.75rem',
+  fontWeight: 600,
+  marginRight: '8px',
+  marginBottom: '8px',
+  border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+}));
+
 const Experience = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const experiences = [
     {
-      title: 'Jr. Full Stack Developer',
-      company: 'Ayzenn Technologies',
-      period: '2025 - Present',
+      title: 'React Native Full Stack Developer',
+      company: 'PanaceaLogics',
+      period: 'Sep 2025 - Present',
       description:
-        'Leading development teams in creating innovative solutions for clients. Implemented agile methodologies that improved productivity by 30%.',
+        'Leading the development of TrySwitch - a comprehensive property selling marketplace built with React Native CLI in TypeScript and .NET backend. Successfully launched and maintained the application on both Play Store and App Store.',
       icon: <WorkIcon fontSize="medium" />,
       type: 'work',
+      technologies: ['React Native CLI', 'TypeScript', '.NET', 'Redux Toolkit', 'AWS', 'Play Store', 'App Store'],
       highlights: [
-        'Led a team of 5 developers on a major project',
-        'Implemented CI/CD pipeline reducing deployment time by 40%',
-        'Introduced code review process improving code quality'
+        'Developed and launched TrySwitch marketplace from concept to production',
+        'Built cross-platform mobile app using React Native CLI with TypeScript',
+        'Implemented robust backend APIs using .NET framework',
+        'Successfully deployed and maintained app on both iOS App Store and Google Play Store',
+        'Optimized app performance and user experience for thousands of users'
       ]
     },
-    // {
-    //   title: 'Frontend Developer',
-    //   company: 'Web Solutions LLC',
-    //   period: '2024 - 2025',
-    //   description:
-    //     'Developed responsive web applications using React and modern JavaScript. Collaborated with UX designers to create intuitive user interfaces.',
-    //   // icon: <WorkIcon fontSize="medium" />,
-    //    icon: <SchoolIcon fontSize="medium" />,
-    //   type: 'work',
-    //   highlights: [
-    //     'Built 10+ responsive web applications',
-    //     'Improved page load speed by 60%',
-    //     'Collaborated with cross-functional teams'
-    //   ]
-    // },
-    
+    {
+      title: 'Jr. Full Stack Developer',
+      company: 'Ayzenn Technologies',
+      period: '2024 - 2025',
+      description:
+        'Developed full-stack web applications and collaborated with cross-functional teams to deliver high-quality software solutions. Implemented modern development practices and contributed to multiple client projects.',
+      icon: <WorkIcon fontSize="medium" />,
+      type: 'work',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Firebase'],
+      highlights: [
+        'Developed responsive web applications using React and modern JavaScript',
+        'Collaborated with UX designers to create intuitive user interfaces',
+        'Implemented RESTful APIs and database schemas',
+        'Participated in agile development methodologies and code reviews'
+      ]
+    },
     {
       title: 'Bachelor of Computer Science',
       company: 'Comsats Institute of Technology, Islamabad',
       period: '2021 - 2025',
       description:
-        'Graduated with honors. Specialized in software engineering, mobile and web development. Participated in various coding competitions and projects.',
+        'Graduated with focus on software engineering, mobile and web development. Gained strong foundation in computer science fundamentals while participating in various coding competitions and technical projects.',
       icon: <SchoolIcon fontSize="medium" />,
       type: 'education',
+      technologies: ['Algorithms', 'Data Structures', 'Software Engineering', 'Mobile Development'],
       highlights: [
-        'Graduated with 2.6 GPA',
-        'Won 2 coding competitions',
-        'Led university tech club as president'
+        'Specialized in software engineering and mobile development',
+        'Participated in multiple coding competitions and hackathons',
+        'Developed several full-stack projects during academic career',
+        'Gained comprehensive understanding of computer science fundamentals'
       ]
     },
   ];
@@ -171,6 +189,19 @@ const Experience = () => {
     })
   };
 
+  const techVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.05,
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    })
+  };
+
   return (
     <ExperienceSection id="experience">
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
@@ -189,7 +220,6 @@ const Experience = () => {
               fontWeight: 800,
               background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
               backgroundClip: 'text',
-              textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               mb: 2
@@ -269,7 +299,7 @@ const Experience = () => {
                   }}
                 >
                   <Box display="flex" alignItems="flex-start" mb={3}>
-                    <IconWrapper type={exp.type}>{exp.icon}</IconWrapper>
+                    <IconWrapper $type={exp.type}>{exp.icon}</IconWrapper>
                     <Box sx={{ flexGrow: 1 }}>
                       <Typography variant="h5" sx={{ fontWeight: 700, mb: 0.5 }}>
                         {exp.title}
@@ -294,11 +324,39 @@ const Experience = () => {
                     </Box>
                   </Box>
                   
-                  <Typography variant="body1" color="text.secondary" paragraph sx={{ lineHeight: 1.7, mb: 2 }}>
+                  <Typography variant="body1" color="text.secondary" paragraph sx={{ lineHeight: 1.7, mb: 3 }}>
                     {exp.description}
                   </Typography>
+
+                  {/* Technologies */}
+                  {exp.technologies && (
+                    <Box sx={{ mb: 3 }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: 'text.primary' }}>
+                        Technologies:
+                      </Typography>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {exp.technologies.map((tech, i) => (
+                          <motion.div
+                            key={i}
+                            custom={i}
+                            variants={techVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.3 }}
+                          >
+                            <TechChip>
+                              {tech}
+                            </TechChip>
+                          </motion.div>
+                        ))}
+                      </Box>
+                    </Box>
+                  )}
                   
                   <Box>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, color: 'text.primary' }}>
+                      Key Achievements:
+                    </Typography>
                     {exp.highlights.map((highlight, i) => (
                       <motion.div
                         key={i}
@@ -307,18 +365,18 @@ const Experience = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
-                        style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}
+                        style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px' }}
                       >
                         <ArrowForwardIcon 
                           sx={{ 
                             fontSize: '16px', 
                             color: theme.palette.primary.main, 
                             mr: 1.5, 
-                            mt: '4px',
+                            mt: '2px',
                             flexShrink: 0 
                           }} 
                         />
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
                           {highlight}
                         </Typography>
                       </motion.div>

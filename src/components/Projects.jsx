@@ -283,6 +283,133 @@ const ProjectActions = styled(Box)({
   }
 });
 
+// Add these styled components for full-screen modal
+const FullScreenDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialog-paper': {
+    margin: 0,
+    width: '100vw',
+    height: '100vh',
+    maxWidth: 'none',
+    maxHeight: 'none',
+    borderRadius: 0,
+    background: 'rgba(0, 0, 0, 0.95)',
+    backdropFilter: 'blur(10px)',
+  },
+}));
+
+const FullScreenImage = styled(motion.img)({
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain',
+  cursor: 'pointer',
+});
+
+const NavigationButton = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  color: 'white',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  backdropFilter: 'blur(10px)',
+  zIndex: 10,
+  width: '60px',
+  height: '60px',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    transform: 'translateY(-50%) scale(1.1)',
+  },
+  '&.Mui-disabled': {
+    opacity: 0.3,
+  },
+}));
+
+const CloseButton = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  top: 20,
+  right: 20,
+  color: 'white',
+  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  backdropFilter: 'blur(10px)',
+  zIndex: 10,
+  width: '50px',
+  height: '50px',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    transform: 'scale(1.1)',
+  },
+}));
+
+const ImageCounter = styled(Typography)(({ theme }) => ({
+  position: 'absolute',
+  top: 20,
+  left: 20,
+  color: 'white',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  padding: '8px 16px',
+  borderRadius: '20px',
+  backdropFilter: 'blur(10px)',
+  zIndex: 10,
+  fontSize: '0.9rem',
+  fontWeight: 600,
+}));
+
+// Add this state near your other states
+const [fullScreenImage, setFullScreenImage] = useState(null);
+const [fullScreenImageIndex, setFullScreenImageIndex] = useState(0);
+
+// Add these functions for full-screen navigation
+const handleOpenFullScreen = (project, imageIndex = 0) => {
+  setFullScreenImage(project);
+  setFullScreenImageIndex(imageIndex);
+};
+
+const handleCloseFullScreen = () => {
+  setFullScreenImage(null);
+  setFullScreenImageIndex(0);
+};
+
+const handleFullScreenNext = () => {
+  if (fullScreenImage) {
+    setFullScreenImageIndex((prevIndex) => 
+      (prevIndex + 1) % fullScreenImage.images.length
+    );
+  }
+};
+
+const handleFullScreenPrevious = () => {
+  if (fullScreenImage) {
+    setFullScreenImageIndex((prevIndex) => 
+      (prevIndex - 1 + fullScreenImage.images.length) % fullScreenImage.images.length
+    );
+  }
+};
+
+// Handle keyboard navigation
+React.useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (!fullScreenImage) return;
+    
+    switch (event.key) {
+      case 'ArrowLeft':
+        handleFullScreenPrevious();
+        break;
+      case 'ArrowRight':
+        handleFullScreenNext();
+        break;
+      case 'Escape':
+        handleCloseFullScreen();
+        break;
+      default:
+        break;
+    }
+  };
+
+  document.addEventListener('keydown', handleKeyDown);
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
+  };
+}, [fullScreenImage]);
+
 // Filter button styles
 const FilterButton = styled(motion.div)(({ theme, active }) => ({
   padding: '16px 32px',
@@ -374,12 +501,17 @@ const ModalImageContainer = styled(Box)({
 
 const ModalImage = styled(motion.img)(({ theme }) => ({
   maxWidth: '100%',
-  maxHeight: '500px',
+  maxHeight: '80vh',
   width: 'auto',
   height: 'auto',
-  objectFit: 'contain', // Contain for modal to show full image
+  objectFit: 'contain',
   borderRadius: '12px',
   boxShadow: theme.shadows[4],
+  cursor: 'pointer',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.02)',
+  },
 }));
 
 // Thumbnail component for modal
@@ -874,54 +1006,63 @@ const Projects = () => {
             </DialogTitle>
 
             <DialogContent sx={{ p: 3, pt: 1 }}>
-              <ModalImageContainer>
-                <ModalImage
-                  key={currentImageIndex}
-                  src={selectedProject.images[currentImageIndex]}
-                  alt={selectedProject.title}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
+            <ModalImageContainer 
+  onClick={() => handleOpenFullScreen(selectedProject, currentImageIndex)}
+  sx={{ cursor: 'zoom-in' }}
+>
+  <ModalImage
+    key={currentImageIndex}
+    src={selectedProject.images[currentImageIndex]}
+    alt={selectedProject.title}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  />
 
-                {selectedProject.images.length > 1 && (
-                  <>
-                    <IconButton
-                      onClick={handlePrevious}
-                      sx={{
-                        position: 'absolute',
-                        left: 10,
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: alpha(theme.palette.background.paper, 0.9),
-                        '&:hover': {
-                          backgroundColor: theme.palette.background.paper,
-                          transform: 'translateY(-50%) scale(1.1)'
-                        }
-                      }}
-                    >
-                      <ChevronLeftIcon />
-                    </IconButton>
+  {selectedProject.images.length > 1 && (
+    <>
+      <IconButton
+        onClick={(e) => {
+          e.stopPropagation();
+          handlePrevious();
+        }}
+        sx={{
+          position: 'absolute',
+          left: 10,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: alpha(theme.palette.background.paper, 0.9),
+          '&:hover': {
+            backgroundColor: theme.palette.background.paper,
+            transform: 'translateY(-50%) scale(1.1)'
+          }
+        }}
+      >
+        <ChevronLeftIcon />
+      </IconButton>
 
-                    <IconButton
-                      onClick={handleNext}
-                      sx={{
-                        position: 'absolute',
-                        right: 10,
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: alpha(theme.palette.background.paper, 0.9),
-                        '&:hover': {
-                          backgroundColor: theme.palette.background.paper,
-                          transform: 'translateY(-50%) scale(1.1)'
-                        }
-                      }}
-                    >
-                      <ChevronRightIcon />
-                    </IconButton>
-                  </>
-                )}
-              </ModalImageContainer>
+      <IconButton
+        onClick={(e) => {
+          e.stopPropagation();
+          handleNext();
+        }}
+        sx={{
+          position: 'absolute',
+          right: 10,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: alpha(theme.palette.background.paper, 0.9),
+          '&:hover': {
+            backgroundColor: theme.palette.background.paper,
+            transform: 'translateY(-50%) scale(1.1)'
+          }
+        }}
+      >
+        <ChevronRightIcon />
+      </IconButton>
+    </>
+  )}
+</ModalImageContainer>
 
               <Typography variant="body1" color="text.secondary" paragraph sx={{ lineHeight: 1.7, mb: 3 }}>
                 {selectedProject.description}
@@ -1017,6 +1158,77 @@ const Projects = () => {
           </StyledDialog>
         )}
       </AnimatePresence>
+      {/* Full Screen Image Viewer */}
+<AnimatePresence>
+  {fullScreenImage && (
+    <FullScreenDialog
+      open={!!fullScreenImage}
+      onClose={handleCloseFullScreen}
+      TransitionProps={{ timeout: 300 }}
+    >
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          overflow: 'hidden',
+        }}
+        onClick={handleCloseFullScreen}
+      >
+        {/* Close Button */}
+        <CloseButton onClick={handleCloseFullScreen}>
+          <CloseIcon />
+        </CloseButton>
+
+        {/* Image Counter */}
+        <ImageCounter>
+          {fullScreenImageIndex + 1} / {fullScreenImage.images.length}
+        </ImageCounter>
+
+        {/* Previous Button */}
+        {fullScreenImage.images.length > 1 && (
+          <NavigationButton
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFullScreenPrevious();
+            }}
+            sx={{ left: 20 }}
+          >
+            <ChevronLeftIcon fontSize="large" />
+          </NavigationButton>
+        )}
+
+        {/* Full Screen Image */}
+        <FullScreenImage
+          src={fullScreenImage.images[fullScreenImageIndex]}
+          alt={`${fullScreenImage.title} - ${fullScreenImageIndex + 1}`}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.3 }}
+          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image
+        />
+
+        {/* Next Button */}
+        {fullScreenImage.images.length > 1 && (
+          <NavigationButton
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFullScreenNext();
+            }}
+            sx={{ right: 20 }}
+          >
+            <ChevronRightIcon fontSize="large" />
+          </NavigationButton>
+        )}
+      </Box>
+    </FullScreenDialog>
+  )}
+</AnimatePresence>
     </ProjectsSection>
   );
 };
