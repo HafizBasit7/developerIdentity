@@ -58,7 +58,7 @@ import shamsi2 from '../assets/image/shamsi2.png';
 import Sham_TotalShops from '../assets/image/Sham_TotalShops.png';
 import ShamEngin from '../assets/image/ShamEngin.png';
 // import ShamTotalEngin from '../assets/image/shamTotalEngineer.png';
-import ShamShop from '../assets/image/shamShop.png';
+// import ShamShop from '../assets/image/shamShop.png';
 
 import Driv1 from '../assets/image/Driv1.png';
 import Driv2 from '../assets/image/Driv2.png';
@@ -565,7 +565,7 @@ const Projects = () => {
       description: 'Digitalize the way solar energy products and services are presented, bought, and managed.',
       technologies: ['React', 'MUI', 'Node.js', 'MongoDB'],
       githubUrl: 'https://github.com/HafizBasit7/Qafzh_Solar_Web',
-      images: [shamsi1, shamsi2,Sham_TotalShops, ShamEngin, ShamShop ],
+      images: [shamsi1, shamsi2,Sham_TotalShops, ShamEngin ],
       role: 'Frontend Developer',
       period: 'August 2025',
       category: 'Web' // Added category

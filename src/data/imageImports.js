@@ -38,7 +38,7 @@ import shamsi2 from '../assets/image/shamsi2.png';
 import Sham_TotalShops from '../assets/image/Sham_TotalShops.png';
 import ShamEngin from '../assets/image/ShamEngin.png';
 // import ShamTotalEngin from '../assets/image/shamTotalEngineer.png';
-import ShamShop from '../assets/image/shamShop.png';
+// import ShamShop from '../assets/image/shamShop.png';
 
 // Mobile Projects
 import List from '../assets/image/screenshots/List.jpg';
@@ -153,7 +153,7 @@ export const IMAGES = {
   },
 
   shamsi: {
-    shamsi1, shamsi2, Sham_TotalShops, ShamEngin, ShamShop
+    shamsi1, shamsi2, Sham_TotalShops, ShamEngin
   },
 
   // Mobile Projects
