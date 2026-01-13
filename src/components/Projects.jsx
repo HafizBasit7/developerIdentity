@@ -77,7 +77,7 @@ import Em7 from '../assets/image/Em7.jpg';
 import Em8 from '../assets/image/Em8.jpg';
 import Em9 from '../assets/image/Em9.jpg';
 
-import MedHome from '../assets/image/MedHome.jpg';
+import MedHome from '../assets/image/MedHomePage.jpg';
 import Med1 from '../assets/image/Med1.jpg';
 import Med2 from '../assets/image/Med2.jpg';
 import Med3 from '../assets/image/Med3.jpg';
