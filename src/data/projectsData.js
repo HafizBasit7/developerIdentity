@@ -2,6 +2,22 @@ import { IMAGES } from './imageImports';
 
 export const PROJECTS_DATA = [
   {
+    id: 'code-3-scribe',
+    title: 'Code 3 Scribe',
+    description: 'Code3Scribe is a comprehensive, AI-powered Electronic Patient Care Reporting (ePCR) and EMS documentation\
+    platform designed specifically for emergency medical services professionals\
+    •Voice-to-Text Narrative Generation: Convert spoken patient assessments into structured medical narratives\
+    •Intelligent Questionnaire Workflow: Guided Q&A system that ensures comprehensive documentation\
+    •Protocol Integration: County-specific EMS protocol lookup and compliance validation\
+    •EMS Software Compatibility: Support for 30+ EMS platforms (ESO, ImageTrend, ZOLL, etc.)',
+    technologies: ['React', 'MUI', '.Net', 'Redux Toolkit', 'HIPAA Compliance', 'Amazon AWS Transcriber'],
+    githubUrl: 'https://github.com/HafizBasit7/code3scribe_',
+    images: Object.values(IMAGES.code3scribe),
+    role: 'Frontend Developer',
+    period: 'December 2025',
+    category: 'Web'
+  },
+  {
     id: 'solar-marketplace',
     title: 'Solar Marketplace',
     description: 'Digitalize the way solar energy products and services are presented, bought, and managed.',
