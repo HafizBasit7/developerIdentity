@@ -37,7 +37,7 @@ import shamsi1 from '../assets/image/shamsi1.png';
 import shamsi2 from '../assets/image/shamsi2.png';
 import Sham_TotalShops from '../assets/image/Sham_TotalShops.png';
 import ShamEngin from '../assets/image/ShamEngin.png';
-import ShamTotalEngin from '../assets/image/shamTotalEngin.png';
+import ShamTotalEngin from '../assets/image/shamTotalEngineer.png';
 import ShamShop from '../assets/image/shamShop.png';
 
 // Mobile Projects
@@ -113,8 +113,24 @@ import Wet2 from '../assets/image/Wet2.jpg';
 import Wet3 from '../assets/image/Wet3.jpg';
 import Wet4 from '../assets/image/Wet4.jpg';
 
+import c1 from '../assets/image/code3scribe/c1.png';
+import c2 from '../assets/image/code3scribe/c2.png';
+import c3 from '../assets/image/code3scribe/c3.png';
+import c4 from '../assets/image/code3scribe/c4.png';
+import c5 from '../assets/image/code3scribe/c5.png';
+import c6 from '../assets/image/code3scribe/c6.png';
+import c7 from '../assets/image/code3scribe/c7.png';
+import c8 from '../assets/image/code3scribe/c8.png';
+import c9 from '../assets/image/code3scribe/c9.png';
+import c10 from '../assets/image/code3scribe/c10.png';
+import c11 from '../assets/image/code3scribe/c11.png';
+import c12 from '../assets/image/code3scribe/c12.png';
+
 export const IMAGES = {
   // Web Projects
+  code3scribe: {
+    c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12
+  },
   solar: {
     Solar1, Solar2, Solar3
   },
